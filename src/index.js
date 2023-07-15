@@ -62,9 +62,10 @@ function handleBreedSelectChange() {
 
 breedSelect.addEventListener('input', handleBreedSelectChange);
 document.addEventListener('DOMContentLoaded', () => {
+  showLoader(); // Показать загрузчик при загрузке страницы
   fetchBreeds()
     .then(breeds => {
-      hideLoader();
+      hideLoader(); // Скрыть загрузчик после успешной загрузки пород
       populateBreedSelect(breeds);
     })
     .catch(error => {
