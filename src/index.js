@@ -62,7 +62,6 @@ function handleBreedSelectChange() {
 
 breedSelect.addEventListener('input', handleBreedSelectChange);
 document.addEventListener('DOMContentLoaded', () => {
-  showLoader();
   fetchBreeds()
     .then(breeds => {
       hideLoader();
