@@ -1,4 +1,4 @@
-import { fetchBreeds, fetchCatByBreed } from './cat-api.js';
+import { fetchBreedsData, fetchCatData } from './cat-api.js';
 
 const breedSelect = document.querySelector('.breed-select');
 const loader = document.querySelector('.loader');
@@ -45,27 +45,37 @@ function populateBreedSelect(breeds) {
 
 function handleBreedSelectChange() {
   const selectedBreedId = breedSelect.value;
-  fetchCatByBreed(selectedBreedId)
+  showLoader();
+  hideError();
+  catInfo.innerHTML = '';
+
+  fetchCatData(selectedBreedId)
     .then(data => {
-      const cat = data[0];
+      const cat = data;
       const breedName = cat.breeds[0].name;
       const description = cat.breeds[0].description;
       const temperament = cat.breeds[0].temperament;
       const imageUrl = cat.url;
 
       showCatInfo(imageUrl, breedName, description, temperament);
+      hideLoader();
     })
     .catch(error => {
       console.error(error);
+      showError();
+      hideLoader();
     });
 }
 
-breedSelect.addEventListener('input', handleBreedSelectChange);
+breedSelect.addEventListener('change', handleBreedSelectChange);
 document.addEventListener('DOMContentLoaded', () => {
-  fetchBreeds()
+  showLoader();
+  hideError();
+  fetchBreedsData()
     .then(breeds => {
       hideLoader();
       populateBreedSelect(breeds);
+      handleBreedSelectChange();
     })
     .catch(error => {
       console.error(error);
