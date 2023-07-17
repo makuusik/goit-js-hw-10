@@ -8,19 +8,15 @@ const catInfo = document.querySelector('.cat-info');
 function showLoader() {
   loader.style.display = 'block';
 }
-
 function hideLoader() {
   loader.style.display = 'none';
 }
-
 function showError() {
   error.style.display = 'block';
 }
-
 function hideError() {
   error.style.display = 'none';
 }
-
 function showCatInfo(imageUrl, breedName, description, temperament) {
   catInfo.innerHTML = `
     <div>
@@ -77,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
       populateBreedSelect(breeds);
       breedSelect.style.display = 'block';
       hideLoader();
+      handleBreedSelectChange();
     })
     .catch(error => {
       console.error(error);
