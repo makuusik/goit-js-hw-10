@@ -69,13 +69,14 @@ function handleBreedSelectChange() {
 
 breedSelect.addEventListener('change', handleBreedSelectChange);
 document.addEventListener('DOMContentLoaded', () => {
+  breedSelect.style.display = 'none';
   showLoader();
   hideError();
   fetchBreedsData()
     .then(breeds => {
-      hideLoader();
       populateBreedSelect(breeds);
-      handleBreedSelectChange();
+      breedSelect.style.display = 'block';
+      hideLoader();
     })
     .catch(error => {
       console.error(error);
